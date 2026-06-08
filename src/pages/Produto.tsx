@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Header from "../components/Header";
+import Footer from "../components/footer";
 import { productService } from "../services/productService";
 
 export default function Produto() {
@@ -17,7 +18,6 @@ export default function Produto() {
         if (!id) return;
 
         const data = await productService.findById(id);
-
         setProduct(data);
       } catch (error) {
         console.error(error);
@@ -37,6 +37,8 @@ export default function Produto() {
         <div className="max-w-6xl mx-auto p-10">
           <div className="h-96 bg-gray-200 animate-pulse rounded-xl" />
         </div>
+
+        <Footer />
       </>
     );
   }
@@ -49,6 +51,8 @@ export default function Produto() {
         <div className="max-w-6xl mx-auto p-10">
           Produto não encontrado.
         </div>
+
+        <Footer />
       </>
     );
   }
@@ -96,8 +100,8 @@ export default function Produto() {
 
               <button
                 onClick={() =>
-                  setQuantity((prev) => prev + 1)
-                }
+                  setQuantity((prev) => prev + 1
+                )}
                 className="border w-10 h-10 rounded-lg"
               >
                 +
@@ -120,6 +124,8 @@ export default function Produto() {
           </button>
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }

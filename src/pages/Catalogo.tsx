@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
+import Footer from "../components/footer";
 
 import { useEffect, useState } from "react";
 import { productService } from "../services/productService";
@@ -14,7 +15,6 @@ export default function Catalogo() {
     async function loadProducts() {
       try {
         const data = await productService.findAll();
-
         setProducts(data);
       } catch (error) {
         console.error(error);
@@ -80,6 +80,8 @@ export default function Catalogo() {
           </div>
         )}
       </main>
+
+      <Footer />
     </>
   );
 }
