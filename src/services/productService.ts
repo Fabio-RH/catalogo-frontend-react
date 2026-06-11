@@ -12,4 +12,15 @@ export const productService = {
 
     return response.data;
   },
+
+  async create(data: {
+    nomeProduto: string;
+    precoProduto: number;
+    categoriaId: number;
+    estoqueId: number;
+  }) {
+    const response = await api.post("/produto", data);
+
+    return response.data;
+  },
 };
