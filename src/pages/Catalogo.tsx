@@ -62,8 +62,31 @@ export default function Catalogo() {
     }
   }
 
+  async function handleDeleteProduct(id: number) {
+    const confirmDelete = window.confirm(
+      "Deseja realmente excluir este produto?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      await productService.delete(id);
+
+      setProducts((prev) =>
+        prev.filter(
+          (product) => product.idProduto !== id
+        )
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao excluir produto");
+    }
+  }
+
   const filteredProducts = products.filter((product) =>
-    product.nomeProduto?.toLowerCase().includes(search.toLowerCase())
+    product.nomeProduto
+      ?.toLowerCase()
+      .includes(search.toLowerCase())
   );
 
   return (
@@ -125,6 +148,7 @@ export default function Catalogo() {
               <ProductCard
                 key={product.idProduto}
                 product={product}
+                onDelete={handleDeleteProduct}
               />
             ))}
           </div>
@@ -206,14 +230,25 @@ export default function Catalogo() {
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 border rounded-lg"
+                className="
+                  px-4
+                  py-2
+                  border
+                  rounded-lg
+                "
               >
                 Cancelar
               </button>
 
               <button
                 onClick={handleCreateProduct}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                className="
+                  px-4
+                  py-2
+                  bg-blue-600
+                  text-white
+                  rounded-lg
+                "
               >
                 Salvar
               </button>

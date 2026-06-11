@@ -23,4 +23,10 @@ export const productService = {
 
     return response.data;
   },
+
+  async delete(id: number) {
+    const response = await api.delete(`/produto/${id}`);
+
+    return response.data;
+  },
 };
