@@ -29,4 +29,21 @@ export const productService = {
 
     return response.data;
   },
+
+  async update(
+    id: number,
+    data: {
+      nomeProduto: string;
+      precoProduto: number;
+      categoriaId: number;
+      estoqueId: number;
+    }
+  ) {
+    const response = await api.patch(
+      `/produto/${id}`,
+      data
+    );
+
+    return response.data;
+  },
 };

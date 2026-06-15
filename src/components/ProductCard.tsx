@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 interface Props {
   product: any;
   onDelete?: (id: number) => void;
+  onEdit?: (product: any) => void;
 }
 
 export default function ProductCard({
   product,
   onDelete,
+  onEdit,
 }: Props) {
   return (
     <div
@@ -60,6 +62,20 @@ export default function ProductCard({
         >
           Ver
         </Link>
+
+        <button
+          onClick={() => onEdit?.(product)}
+          className="
+            flex-1
+            bg-yellow-500
+            text-white
+            py-2
+            rounded-lg
+            hover:bg-yellow-600
+          "
+        >
+          Editar
+        </button>
 
         <button
           onClick={() =>
