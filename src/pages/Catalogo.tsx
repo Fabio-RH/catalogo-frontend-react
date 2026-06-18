@@ -35,16 +35,19 @@ export default function Catalogo() {
   });
 
   // ================= CARREGAMENTO DE DADOS =================
-  async function loadProducts() {
-    try {
-      const data = await productService.findAll();
-      setProducts(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+async function loadProducts() {
+  try {
+    const data = await productService.findAll();
+
+    console.log("PRODUTOS RECEBIDOS:", data);
+
+    setProducts(data);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoading(false);
   }
+}
 
   async function loadCategories() {
     try {
