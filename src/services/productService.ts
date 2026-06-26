@@ -3,7 +3,6 @@ import { api } from "./api";
 export const productService = {
   async findAll() {
     const response = await api.get("/produto");
-
     return response.data;
   },
 

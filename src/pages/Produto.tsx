@@ -18,6 +18,9 @@ export default function Produto() {
         if (!id) return;
 
         const data = await productService.findById(id);
+
+        console.log("Produto recebido:", data);
+
         setProduct(data);
       } catch (error) {
         console.error(error);
@@ -61,67 +64,92 @@ export default function Produto() {
     <>
       <Header />
 
-      <main className="max-w-4xl mx-auto px-6 py-10">
-        <div className="border rounded-xl p-8 bg-white shadow-sm">
-          <span className="text-blue-600 text-sm">
-            Categoria #{product.categoriaId}
-          </span>
+      <main className="max-w-6xl mx-auto px-6 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* IMAGEM */}
+          <div className="bg-white border rounded-xl shadow-sm p-4">
+            <img
+              src={
+                product.urlImagem && product.urlImagem.trim() !== ""
+                  ? product.urlImagem
+                  : "https://via.placeholder.com/600x600?text=Sem+Imagem"
+              }
+              alt={product.nomeProduto}
+              className="w-full h-[500px] object-cover rounded-lg"
+              onError={(e) => {
+                console.error(
+                  "Erro ao carregar imagem:",
+                  product.urlImagem
+                );
 
-          <h1 className="text-3xl font-bold mt-2">
-            {product.nomeProduto}
-          </h1>
-
-          <div className="text-4xl text-blue-600 font-bold mt-6">
-            R$ {Number(product.precoProduto).toFixed(2)}
+                e.currentTarget.src =
+                  "https://via.placeholder.com/600x600?text=Sem+Imagem";
+              }}
+            />
           </div>
 
-          <div className="mt-4 text-gray-600">
-            Estoque ID: {product.estoqueId}
-          </div>
+          {/* DADOS */}
+          <div className="bg-white border rounded-xl shadow-sm p-8">
+            <span className="text-blue-600 text-sm">
+              Categoria #{product.categoriaId}
+            </span>
 
-          <div className="mt-8">
-            <p className="font-medium mb-2">
-              Quantidade
-            </p>
+            <h1 className="text-3xl font-bold mt-2">
+              {product.nomeProduto}
+            </h1>
 
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() =>
-                  setQuantity((prev) =>
-                    prev > 1 ? prev - 1 : 1
-                  )
-                }
-                className="border w-10 h-10 rounded-lg"
-              >
-                -
-              </button>
-
-              <span>{quantity}</span>
-
-              <button
-                onClick={() =>
-                  setQuantity((prev) => prev + 1
-                )}
-                className="border w-10 h-10 rounded-lg"
-              >
-                +
-              </button>
+            <div className="text-4xl text-blue-600 font-bold mt-6">
+              R$ {Number(product.precoProduto).toFixed(2)}
             </div>
-          </div>
 
-          <button
-            className="
-              mt-8
-              w-full
-              bg-blue-600
-              hover:bg-blue-700
-              text-white
-              py-3
-              rounded-lg
-            "
-          >
-            Adicionar ao Carrinho
-          </button>
+            <div className="mt-4 text-gray-600">
+              Estoque ID: {product.estoqueId}
+            </div>
+
+            <div className="mt-8">
+              <p className="font-medium mb-2">
+                Quantidade
+              </p>
+
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() =>
+                    setQuantity((prev) =>
+                      prev > 1 ? prev - 1 : 1
+                    )
+                  }
+                  className="border w-10 h-10 rounded-lg"
+                >
+                  -
+                </button>
+
+                <span>{quantity}</span>
+
+                <button
+                  onClick={() =>
+                    setQuantity((prev) => prev + 1)
+                  }
+                  className="border w-10 h-10 rounded-lg"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <button
+              className="
+                mt-8
+                w-full
+                bg-blue-600
+                hover:bg-blue-700
+                text-white
+                py-3
+                rounded-lg
+              "
+            >
+              Adicionar ao Carrinho
+            </button>
+          </div>
         </div>
       </main>
 
