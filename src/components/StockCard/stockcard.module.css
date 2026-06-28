@@ -1,0 +1,69 @@
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+
+  transition: box-shadow .25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
+
+.id {
+  color: #2563eb;
+  font-size: .75rem;
+}
+
+.title {
+  margin-top: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.status {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: .875rem;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.button {
+  flex: 1;
+
+  padding: 10px 0;
+
+  border: none;
+  border-radius: 10px;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: background-color .2s;
+}
+
+.edit {
+  background: #eab308;
+}
+
+.edit:hover {
+  background: #ca8a04;
+}
+
+.delete {
+  background: #ef4444;
+}
+
+.delete:hover {
+  background: #dc2626;
+}

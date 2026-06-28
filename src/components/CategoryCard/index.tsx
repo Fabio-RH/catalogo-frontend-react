@@ -1,3 +1,5 @@
+import styles from "./CategoryCard.module.css";
+
 interface Props {
   category: any;
   onDelete?: (id: number) => void;
@@ -10,34 +12,32 @@ export default function CategoryCard({
   onEdit,
 }: Props) {
   return (
-    <div className="bg-white rounded-xl border p-4 shadow-sm hover:shadow-lg transition">
+    <div className={styles.card}>
       <div>
-        <span className="text-xs text-blue-600">
+        <span className={styles.id}>
           Categoria #{category.idCategoria}
         </span>
 
-        <h3 className="font-semibold mt-2 text-lg">
+        <h3 className={styles.title}>
           {category.nomeCategoria}
         </h3>
 
-        <p className="mt-2 text-sm text-gray-500">
+        <p className={styles.description}>
           {category.descricaoCategoria}
         </p>
       </div>
 
-      <div className="flex gap-2 mt-6">
+      <div className={styles.actions}>
         <button
           onClick={() => onEdit?.(category)}
-          className="flex-1 bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600"
+          className={`${styles.button} ${styles.edit}`}
         >
           Editar
         </button>
 
         <button
-          onClick={() =>
-            onDelete?.(category.idCategoria)
-          }
-          className="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
+          onClick={() => onDelete?.(category.idCategoria)}
+          className={`${styles.button} ${styles.delete}`}
         >
           Excluir
         </button>

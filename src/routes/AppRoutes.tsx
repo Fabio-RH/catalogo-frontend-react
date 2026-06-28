@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import Catalogo from "../pages/Catalogo"; // ADM
-import CatalogoCliente from "../pages/CatalogoCliente"; // CLIENTE
+import Catalogo from "../pages/Catalogo";
+import CatalogoCliente from "../pages/CatalogoCliente";
 import Produto from "../pages/Produto";
 
 export default function AppRoutes() {

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import Header from "../components/Header";
-import Footer from "../components/footer";
-import { productService } from "../services/productService";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { productService } from "../../services/productService";
+
+import styles from "./Produto.module.css";
 
 export default function Produto() {
   const { id } = useParams();
@@ -37,8 +39,8 @@ export default function Produto() {
       <>
         <Header />
 
-        <div className="max-w-6xl mx-auto p-10">
-          <div className="h-96 bg-gray-200 animate-pulse rounded-xl" />
+        <div className={styles.loadingContainer}>
+          <div className={styles.loadingSkeleton} />
         </div>
 
         <Footer />
@@ -51,7 +53,7 @@ export default function Produto() {
       <>
         <Header />
 
-        <div className="max-w-6xl mx-auto p-10">
+        <div className={styles.loadingContainer}>
           Produto não encontrado.
         </div>
 
@@ -64,10 +66,10 @@ export default function Produto() {
     <>
       <Header />
 
-      <main className="max-w-6xl mx-auto px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* IMAGEM */}
-          <div className="bg-white border rounded-xl shadow-sm p-4">
+      <main className={styles.main}>
+        <div className={styles.grid}>
+          {/* Imagem */}
+          <div className={styles.imageCard}>
             <img
               src={
                 product.urlImagem && product.urlImagem.trim() !== ""
@@ -75,50 +77,45 @@ export default function Produto() {
                   : "https://via.placeholder.com/600x600?text=Sem+Imagem"
               }
               alt={product.nomeProduto}
-              className="w-full h-[500px] object-cover rounded-lg"
+              className={styles.image}
               onError={(e) => {
-                console.error(
-                  "Erro ao carregar imagem:",
-                  product.urlImagem
-                );
-
                 e.currentTarget.src =
                   "https://via.placeholder.com/600x600?text=Sem+Imagem";
               }}
             />
           </div>
 
-          {/* DADOS */}
-          <div className="bg-white border rounded-xl shadow-sm p-8">
-            <span className="text-blue-600 text-sm">
+          {/* Dados */}
+          <div className={styles.infoCard}>
+            <span className={styles.category}>
               Categoria #{product.categoriaId}
             </span>
 
-            <h1 className="text-3xl font-bold mt-2">
+            <h1 className={styles.title}>
               {product.nomeProduto}
             </h1>
 
-            <div className="text-4xl text-blue-600 font-bold mt-6">
+            <div className={styles.price}>
               R$ {Number(product.precoProduto).toFixed(2)}
             </div>
 
-            <div className="mt-4 text-gray-600">
+            <div className={styles.stock}>
               Estoque ID: {product.estoqueId}
             </div>
 
-            <div className="mt-8">
-              <p className="font-medium mb-2">
+            <div className={styles.quantityContainer}>
+              <p className={styles.quantityLabel}>
                 Quantidade
               </p>
 
-              <div className="flex items-center gap-4">
+              <div className={styles.quantity}>
                 <button
                   onClick={() =>
                     setQuantity((prev) =>
                       prev > 1 ? prev - 1 : 1
                     )
                   }
-                  className="border w-10 h-10 rounded-lg"
+                  className={styles.quantityButton}
                 >
                   -
                 </button>
@@ -129,24 +126,14 @@ export default function Produto() {
                   onClick={() =>
                     setQuantity((prev) => prev + 1)
                   }
-                  className="border w-10 h-10 rounded-lg"
+                  className={styles.quantityButton}
                 >
                   +
                 </button>
               </div>
             </div>
 
-            <button
-              className="
-                mt-8
-                w-full
-                bg-blue-600
-                hover:bg-blue-700
-                text-white
-                py-3
-                rounded-lg
-              "
-            >
+            <button className={styles.buyButton}>
               Adicionar ao Carrinho
             </button>
           </div>

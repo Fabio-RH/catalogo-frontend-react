@@ -1,3 +1,5 @@
+import styles from "./StockCard.module.css";
+
 interface Props {
   stock: any;
   onDelete?: (id: number) => void;
@@ -10,35 +12,33 @@ export default function StockCard({
   onEdit,
 }: Props) {
   return (
-    <div className="bg-white rounded-xl border p-4 shadow-sm hover:shadow-lg transition">
+    <div className={styles.card}>
       <div>
-        <span className="text-xs text-blue-600">
+        <span className={styles.id}>
           Estoque #{stock.idEstoque}
         </span>
 
-        <h3 className="font-semibold mt-2 text-lg">
+        <h3 className={styles.title}>
           Quantidade: {stock.quantidadeEstoque}
         </h3>
 
-        <p className="mt-2 text-sm text-gray-500">
+        <p className={styles.status}>
           Disponibilidade:{" "}
           {stock.disponibilidadeEstoque}
         </p>
       </div>
 
-      <div className="flex gap-2 mt-6">
+      <div className={styles.actions}>
         <button
           onClick={() => onEdit?.(stock)}
-          className="flex-1 bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600"
+          className={`${styles.button} ${styles.edit}`}
         >
           Editar
         </button>
 
         <button
-          onClick={() =>
-            onDelete?.(stock.idEstoque)
-          }
-          className="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
+          onClick={() => onDelete?.(stock.idEstoque)}
+          className={`${styles.button} ${styles.delete}`}
         >
           Excluir
         </button>
